@@ -1,6 +1,7 @@
 package com.fajarwz.menews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fajarwz.menews.Model.Articles;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by: fajarwz on 23/02/20.
@@ -39,14 +46,30 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Articles a = articles.get(position);
+        final Articles a = articles.get(position);
         holder.tvTitle.setText(a.getTitle());
         holder.tvSource.setText(a.getSource().getName());
-        holder.tvDate.setText(a.getPublishedAt());
+        holder.tvDate.setText(dateTime(a.getPublishedAt()));
 
         String imageUrl = a.getUrlToImage();
+        //String url = a.getUrl();
 
         Picasso.with(context).load(imageUrl).into(holder.imageView);
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailedActivity.class);
+                /*intent.putExtra("title", a.getTitle());
+                intent.putExtra("source", a.getSource().getName());
+                intent.putExtra("time", dateTime(a.getPublishedAt()));
+                intent.putExtra("desc", dateTime(a.getDescription()));
+                intent.putExtra("imageUrl", a.getUrlToImage());*/
+                intent.putExtra("url", a.getUrl());
+
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,5 +91,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             imageView = itemView.findViewById(R.id.image);
             cardView = itemView.findViewById(R.id.cardView);
         }
+    }
+
+    public String dateTime(String t) {
+        PrettyTime prettyTime = new PrettyTime(new Locale(getCountry()));
+        String time = null;
+
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:", Locale.ENGLISH);
+            Date date = simpleDateFormat.parse(t);
+            time = prettyTime.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return time;
+    }
+
+    public String getCountry() {
+        Locale locale = Locale.getDefault();
+        String country = locale.getCountry();
+        return country.toLowerCase();
     }
 }

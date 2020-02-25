@@ -17,6 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
+            <ProgressBar
+                android:id="@+id/loader"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                />
+
             <ImageView
                 android:id="@+id/image"
                 android:scaleType="centerCrop"
@@ -49,7 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Source"
-                    android:padding="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="4dp"
+
                     android:textSize="16dp"
                     android:ems="15"
                     android:textColor="@color/white"/>
@@ -59,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Date"
-                    android:padding="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="4dp"
                     android:textSize="16dp"
                     android:textColor="@color/white"
                     android:gravity="right"/>

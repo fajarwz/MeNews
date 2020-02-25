@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="NEWS"
+        android:text="MENEWS"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -29,30 +29,29 @@
         android:background="@drawable/black_background">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etQuery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/black_background"
             android:ems="10"
             android:padding="10dp"
             android:hint="Search"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/grey"
+            android:textColor="@color/white"
+            android:textColorHint="#666666"
             android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_row="0"
             android:inputType="textPersonName"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/black_background"
             android:layout_column="1"
             android:layout_row="0"
             android:drawableRight="@drawable/ic_search_white_24dp"
-            android:paddingRight="20dp"
-            android:text="Button"/>
+            android:paddingRight="20dp"/>
 
     </GridLayout>
 
@@ -63,12 +62,19 @@
         android:layout_marginEnd="10dp"
         android:text="Powered by NewsAPI.org"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp">
+        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
